@@ -14,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import academy.devdojo.springboot2.domain.Anime;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class AnimeService {
@@ -33,6 +35,7 @@ public class AnimeService {
 				.orElseThrow(() -> new BadRequestException("Anime not Found"));
 	}
 
+	@Transactional
 	public Anime save(AnimePostRequestBody animePostRequestBody) {
 		return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
 	}
